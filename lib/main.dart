@@ -41,21 +41,20 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(widget.title),
         ),
         body: Center(
-          child: BlocListener<CounterCubit, CounterState>(
-            listener: (context, state) {
-              if (state.wasIncrememted == true) {
-                Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text('Increment'),
-                    duration: Duration(milliseconds: 2000)));
-              }
-              else{
-                Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text('Decrement'),
-                    duration: Duration(milliseconds: 500)));
-              }
-            },
-            child: BlocBuilder<CounterCubit, CounterState>(
-                builder: (context, state) {
+          child:BlocConsumer<CounterCubit, CounterState>(
+            listener:  (context, state) {
+        if (state.wasIncrememted == true) {
+        Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text('Increment'),
+        duration: Duration(milliseconds: 2000)));
+        }
+        else{
+        Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text('Decrement'),
+        duration: Duration(milliseconds: 500)));
+        }
+        },
+            builder: (context, state) {
               return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -86,7 +85,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     )
                   ]);
             }),
-          ),
         ));
   }
 }
